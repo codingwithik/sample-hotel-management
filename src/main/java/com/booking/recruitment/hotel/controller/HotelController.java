@@ -31,15 +31,22 @@ public class HotelController {
     return hotelService.createNewHotel(hotel);
   }
 
-  @GetMapping(value = "{id}")
+  @GetMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.OK)
   public Hotel getHotelById(@PathVariable("id") Long id) {
     return hotelService.getHotelById(id);
   }
 
-  @PutMapping(value = "{id}")
+  @PutMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.OK)
   public GenericResponse deleteHotelById(@PathVariable("id") Long id) {
     return hotelService.deleteHotelById(id);
   }
+
+  @GetMapping(value = "/search/{cityId}")
+  @ResponseStatus(HttpStatus.OK)
+  public List<Hotel> getAllHotelsWithInDistanceByCityId(@PathVariable("cityId") Long cityId, @RequestParam(defaultValue = "distance") String sortBy) {
+    return hotelService.searchHotelsByCityIdAndDistance(cityId);
+  }
+
 }

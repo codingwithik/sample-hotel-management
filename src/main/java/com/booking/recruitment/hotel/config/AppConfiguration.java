@@ -21,7 +21,7 @@ public class AppConfiguration {
 
     @Bean
     public HotelService hotelService() {
-        return new DefaultHotelService(hotelRepository);
+        return new DefaultHotelService(hotelRepository, cityRepository);
     }
 
     @Bean

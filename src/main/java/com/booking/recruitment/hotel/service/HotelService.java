@@ -16,5 +16,5 @@ public interface HotelService {
 
   GenericResponse deleteHotelById(Long id);
 
-
+  List<Hotel> searchHotelsByCityIdAndDistance(Long cityId);
 }

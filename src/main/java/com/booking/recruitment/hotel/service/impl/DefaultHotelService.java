@@ -3,9 +3,12 @@ package com.booking.recruitment.hotel.service.impl;
 import com.booking.recruitment.hotel.dto.GenericResponse;
 import com.booking.recruitment.hotel.exception.BadRequestException;
 import com.booking.recruitment.hotel.exception.ElementNotFoundException;
+import com.booking.recruitment.hotel.model.City;
 import com.booking.recruitment.hotel.model.Hotel;
+import com.booking.recruitment.hotel.repository.CityRepository;
 import com.booking.recruitment.hotel.repository.HotelRepository;
 import com.booking.recruitment.hotel.service.HotelService;
+import com.booking.recruitment.hotel.util.UtilClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +18,13 @@ import java.util.stream.Collectors;
 @Service
 public class DefaultHotelService implements HotelService {
   private final HotelRepository hotelRepository;
+  private final CityRepository cityRepository;
 
   @Autowired
-  public DefaultHotelService(HotelRepository hotelRepository) {
+  public DefaultHotelService(HotelRepository hotelRepository, CityRepository cityRepository) {
+
     this.hotelRepository = hotelRepository;
+    this.cityRepository = cityRepository;
   }
 
   @Override
@@ -65,5 +71,14 @@ public class DefaultHotelService implements HotelService {
     hotelRepository.save(hotel);
 
     return new GenericResponse("Hotel deleted successfully");
+  }
+
+  @Override
+  public List<Hotel> searchHotelsByCityIdAndDistance(Long cityId) {
+    City city = cityRepository.findById(cityId).orElseThrow(() ->
+            new ElementNotFoundException("City with id: "+cityId+" not found!"));
+
+    double distance = UtilClass.distance(city.getCityCentreLatitude(), city.getCityCentreLongitude());
+    return hotelRepository.findHotelWithInDistance(city.getCityCentreLatitude(), city.getCityCentreLongitude(), distance);
   }
 }
