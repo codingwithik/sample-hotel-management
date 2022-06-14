@@ -34,7 +34,7 @@ class RatingControllerTest {
     mockMvc
         .perform(get("/rating/city/2"))
         .andExpect(status().is2xxSuccessful())
-        .andExpect(jsonPath("numberOfRatings", equalTo(4)))
-        .andExpect(jsonPath("averageRating", closeTo(6.05, 0.01)));
+        .andExpect(jsonPath("numberOfRatings", equalTo(2)))
+        .andExpect(jsonPath("averageRating", closeTo(8.45, 0.01)));
   }
 }

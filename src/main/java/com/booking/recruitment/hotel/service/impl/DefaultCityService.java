@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-class DefaultCityService implements CityService {
+public class DefaultCityService implements CityService {
   private final CityRepository cityRepository;
 
   @Autowired
-  DefaultCityService(CityRepository cityRepository) {
+  public DefaultCityService(CityRepository cityRepository) {
     this.cityRepository = cityRepository;
   }
 

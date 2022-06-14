@@ -43,7 +43,7 @@ class HotelControllerTest {
     mockMvc
         .perform(get("/hotel"))
         .andExpect(status().is2xxSuccessful())
-        .andExpect(jsonPath("$", hasSize((int) repository.count())));
+        .andExpect(jsonPath("$", hasSize(repository.findAllByDeleted(false).size())));
   }
 
   @Test

@@ -1,5 +1,6 @@
 package com.booking.recruitment.hotel.controller;
 
+import com.booking.recruitment.hotel.dto.GenericResponse;
 import com.booking.recruitment.hotel.model.Hotel;
 import com.booking.recruitment.hotel.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,17 @@ public class HotelController {
   @ResponseStatus(HttpStatus.CREATED)
   public Hotel createHotel(@RequestBody Hotel hotel) {
     return hotelService.createNewHotel(hotel);
+  }
+
+  @GetMapping(value = "{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public Hotel getHotelById(@PathVariable("id") Long id) {
+    return hotelService.getHotelById(id);
+  }
+
+  @PutMapping(value = "{id}")
+  @ResponseStatus(HttpStatus.OK)
+  public GenericResponse deleteHotelById(@PathVariable("id") Long id) {
+    return hotelService.deleteHotelById(id);
   }
 }

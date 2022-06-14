@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-class DefaultRatingService implements RatingService {
+public class DefaultRatingService implements RatingService {
   private final HotelService hotelService;
 
   @Autowired
-  DefaultRatingService(HotelService hotelService) {
+  public DefaultRatingService(HotelService hotelService) {
     this.hotelService = hotelService;
   }
 
